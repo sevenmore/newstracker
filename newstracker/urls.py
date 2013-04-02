@@ -19,11 +19,10 @@ urlpatterns = patterns('',
     url(r'^logout/$', logout, name='logout'),
     url(r'^register/$', register, name='register'),
 
-<<<<<<< HEAD
+
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
-=======
->>>>>>> adb7ae9d4b2903c6b164e65dde3f6fa1a71fe407
+
 )
 
 handler500 = error_500

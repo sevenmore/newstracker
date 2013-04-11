@@ -6,19 +6,12 @@ from django.conf import settings
 from django.contrib import admin
 admin.autodiscover()
 
-from view.views import index, account, analysis, about, error_404, error_500
-from login.views import logout, login, register
+from view.views import error_404, error_500
 
 urlpatterns = patterns('',
-    url(r'^$', index, name='index'),
+    url(r'^', include("view.urls")),
+    url(r'^', include("login.urls")),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^account/$', account, name='account'),
-    url(r'^analysis/$', analysis, name='account'),
-    url(r'^about/$', about, name='account'),
-    url(r'^login/$', login, name='login'),
-    url(r'^logout/$', logout, name='logout'),
-    url(r'^register/$', register, name='register'),
-
 )
 
 handler500 = error_500

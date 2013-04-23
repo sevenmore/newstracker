@@ -9,6 +9,8 @@ class In(models.Model):
     pub_date = models.DateTimeField('date published')
     url = models.CharField(max_length=400)
     tags = models.CharField(max_length=400)
+    def __unicode__(self):
+        return self.url;
 
 
 class Out(models.Model):

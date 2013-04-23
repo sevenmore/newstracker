@@ -1,8 +1,11 @@
+{% extends "view/base.html" %}
+{% block title %}Account{% endblock %}
+{% block sidebar %}
 <ul>
     <li><a href="/">Index</a></li>
     <li><a href="/logout/">Odjava</a></li>
 </ul>
-
+{% endblock %}
 {% block content %}
     Zadnja prijava: {{ user.last_login }}
     Če ne želite spremeniti podatka pustite polje prazno.
@@ -14,3 +17,6 @@
         <p><input type="submit" value="Shrani"></p>
     </form>
 {% endblock %}
+
+
+

@@ -1,4 +1,4 @@
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, render
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
 
@@ -29,13 +29,13 @@ def save(self, commit=True):
     return self.user
 
 def analysis(request):
-    return render_to_response("view/analysis.html", context_instance=RequestContext(request))
+    return render(request, "view/analysis.html")
 
 def about(request):
-    return render_to_response("view/about.html", context_instance=RequestContext(request))
+    return render(request, "view/about.html")
 
 def error_404(request):
-    return render_to_response("view/404.html", context_instance = RequestContext(request))
+    return render(request, "view/404.html")
 
 def error_500(request):
-    return render_to_response("view/500.html", context_instance = RequestContext(request))
+    return render(request, "view/500.html")

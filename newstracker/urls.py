@@ -9,10 +9,10 @@ admin.autodiscover()
 from view.views import error_404, error_500
 
 urlpatterns = patterns('',
-    url(r'^', include("view.urls")),
-    url(r'^', include("login.urls")),
-    url(r'^admin/', include(admin.site.urls)),
-)
+                       url(r'^', include("view.urls")),
+                       url(r'^', include("login.urls")),
+                       url(r'^admin/', include(admin.site.urls)),
+                       )
 
 handler500 = error_500
 handler404 = error_404

@@ -3,7 +3,7 @@
 {% block html_attributes %}ng-app="newstracker"{% endblock %}
 {% block body_attributes %}ng-controller="RssIn"{% endblock %}
 {% block sidebar %}
-<ul>
+<ul class="nav nav-tabs">
     {% if not user.is_authenticated %}
     <li><a href="/login/">Prijava</a></li>
     <li><a href="/register/">Registracija</a></li>

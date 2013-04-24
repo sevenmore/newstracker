@@ -9,8 +9,9 @@ class In(models.Model):
     pub_date = models.DateTimeField('date published')
     url = models.CharField(max_length=400)
     tags = models.CharField(max_length=400)
+
     def __unicode__(self):
-        return self.url;
+        return self.url
 
 
 class Out(models.Model):
@@ -24,6 +25,7 @@ class Out(models.Model):
     #id_user=models.IntegerField(primary_key=True)
     #username=models.CharField(max_length=20)
 #    subscription = models.ManyToManyField(RssOut, through='Subscription')
+
 
 class Subscription(models.Model):
     user = models.ForeignKey(User)

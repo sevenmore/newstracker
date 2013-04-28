@@ -5,6 +5,7 @@ from django.contrib import auth
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 
+
 def login(request):
     if request.user.is_authenticated():
         return HttpResponseRedirect("../")
@@ -18,18 +19,23 @@ def login(request):
                 return HttpResponseRedirect("../")
             else:
             # Return a 'disabled account' error message
-                return HttpResponse("<ul><li><a href=\"/\">Index</a></li></ul>Disabled account")
+                return HttpResponse("<ul><li><a href=\"/\">Index""</a>"
+                                    "</li></ul>Disabled account")
         else:
             # Return an 'invalid login' error message.
-            return HttpResponse("<ul><li><a href=\"/\">Index</a></li></ul>Invalid login");
+            return HttpResponse("<ul><li><a href=\"/\">Index</a>"
+                                "</li></ul>Invalid login")
     else:
         return render(request, 'login/index.html')
+
 
 def logout(request):
     if not request.user.is_authenticated():
         return HttpResponseRedirect("/login")
     auth.logout(request)
-    return HttpResponse("<ul><li><a href=\"/\">Index</a></li></ul>You've been logged out.");
+    return HttpResponse("<ul><li><a href=\"/\">Index</a>"
+                        "</li></ul>You've been logged out.")
+
 
 def register(request):
     if request.user.is_authenticated():
@@ -41,4 +47,4 @@ def register(request):
             return HttpResponseRedirect("/login")
     else:
         form = UserCreationForm()
-    return render_to_response("login/register.html", {'form': form,})
+    return render_to_response("login/register.html", {'form': form, })

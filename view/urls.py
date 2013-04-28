@@ -10,6 +10,7 @@ urlpatterns = patterns('',
                        url(r'^account/$', views.account, name='account'),
                        url(r'^analysis/$', views.analysis, name='analysis'),
                        url(r'^about/$', views.about, name='about'),
+                       url(r'viz/$', views.viz, name='viz'),
                        url(r'^api/', include(v1_api.urls)),
                        url(r'^$', views.index, name='index'),
                        )

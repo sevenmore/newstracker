@@ -1,0 +1,58 @@
+{% extends "view/base.html" %}
+{% block title %}Index{% endblock %}
+{% block scripts %}
+    {% load staticfiles %}
+    <script src="{% static 'view/js/raphael-min.js' %}"></script>
+    <script src="{% static 'view/js/popup.js' %}"></script>
+    <script src="{% static 'view/js/analytics.js' %}"></script>
+{% endblock %}
+{% block html_attributes %}ng-app="newstracker"{% endblock %}
+{% block body_attributes %}ng-controller="RssIn"{% endblock %}
+{% block sidebar %}
+    <ul class="nav nav-tabs">
+        {% if not user.is_authenticated %}
+            <li><a href="/login/">Prijava</a></li>
+            <li><a href="/register/">Registracija</a></li>
+        {% else %}
+            <li><a href="/account/">Račun</a></li>
+            <li><a href="/logout/">Odjava</a></li>
+        {% endif %}
+        <li><a href="/viz/">Luštna vizualizacija</a></li>
+    </ul>
+{% endblock %}
+{% block content %}
+    <h1>VIZUALIZACIJA UPORABNIKOV (FAKE)</h1>
+    <ul>
+        <table id="data">
+            <tfoot>
+            <tr>
+                <th>1</th>
+                <th>2</th>
+                <th>3</th>
+                <th>4</th>
+                <th>5</th>
+                <th>6</th>
+                <th>7</th>
+                <th>8</th>
+                <th>9</th>
+                <th>10</th>
+            </tr>
+            </tfoot>
+            <tbody>
+            <tr>
+                <td>0</td>
+                <td>1</td>
+                <td>3</td>
+                <td>8</td>
+                <td>9</td>
+                <td>11</td>
+                <td>21</td>
+                <td>47</td>
+                <td>62</td>
+                <td>73</td>
+            </tr>
+            </tbody>
+        </table>
+        <div id="holder"></div>
+    </ul>
+{% endblock %}

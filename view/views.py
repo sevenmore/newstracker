@@ -39,6 +39,10 @@ def save(self, commit=True):
     return self.user
 
 
+def viz(request):
+    return render(request, "view/viz.html")
+
+
 def analysis(request):
     return render(request, "view/analysis.html")
 

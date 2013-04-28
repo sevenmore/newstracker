@@ -1,0 +1,17 @@
+{% extends "login/base.html" %}
+{% block title %}Login{% endblock %}
+
+{% block content %}
+
+{% if form.errors %}
+    <p>Invalid username or password</p>
+{% endif %}
+
+<form class="well" method="post">
+    <p>Username: <input type="text" class="span3" name="username"></p>
+    <p>Password: <input type="password" class="span3" name="password"></p>
+    <p><input type="submit" class="btn btn-primary" value="Login"></p>
+
+</form>
+
+{% endblock %}

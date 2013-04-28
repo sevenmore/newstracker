@@ -1,0 +1,22 @@
+{% extends "view/base.html" %}
+{% block title %}Account{% endblock %}
+{% block sidebar %}
+<ul class="nav nav-tabs">
+    <li><a href="/">Index</a></li>
+    <li><a href="/logout/">Odjava</a></li>
+</ul>
+{% endblock %}
+{% block content %}
+    Zadnja prijava: {{ user.last_login }}
+    Če ne želite spremeniti podatka pustite polje prazno.
+    <form action="" method="post" class="well">
+        <p><label>Ime: </label><input type="text" class="span3" name="first_name" value="{{ user.first_name }}"></p>
+        <p><label>Priimek: </label><input type="text" class="span3" name="last_name" value="{{ user.last_name }}"></p>
+        <p><label>E-mail: </label><input type="text" class="span3" name="email" value="{{ user.email }}"></p>
+        <p><label>Geslo: </label><input type="password" class="span3" class="btn btn-primary" name="password" value=""></p>
+        <p><input type="submit" value="Shrani"></p>
+    </form>
+{% endblock %}
+
+
+

@@ -12,5 +12,6 @@ urlpatterns = patterns('',
                        url(r'^about/$', views.about, name='about'),
                        url(r'viz/$', views.viz, name='viz'),
                        url(r'^api/', include(v1_api.urls)),
+                       url(r'^rss/$', views.rss, name='rss'),
                        url(r'^$', views.index, name='index'),
                        )

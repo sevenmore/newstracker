@@ -1,7 +1,8 @@
 from django.shortcuts import render_to_response, render
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
-
+from django.utils.html import strip_tags
+import feedparser
 
 def index(request):
     return render_to_response("view/index.html",
@@ -38,6 +39,13 @@ def save(self, commit=True):
         self.user.save()
     return self.user
 
+
+def rss(request):
+    rss = "http://www.24ur.com/rss/"
+    feed = feedparser.parse( rss )
+    for i in feed['items']:
+        i['summary'] = strip_tags(i['summary']);
+    return render_to_response("view/rss.html", {'feed':feed['items']})
 
 def viz(request):
     return render(request, "view/viz.html")

@@ -1,0 +1,24 @@
+{% extends "view/base.html" %}
+{% block title %}RSS{% endblock %}
+{% block sidebar %}
+{% endblock %}
+{% block content %}
+    {% for i in feed %}
+        <div>
+            <a href="{{ i.link }}">{{ i.title }}</a>
+            <p>{{ i.summary  }}</p>
+        </div>
+    {% endfor %}
+{% endblock %}
+
+------------------------------------------------<br>
+Summary detail: {{ i.summary_detail }}<br>
+Published parse: {{ i.published_parsed }}<br>
+Published parse: {{ i.published_parsed }}<br>
+Links: {{ i.links }}<br>
+Title: {{ i.title }}<br>
+Tags: {{ i.tags }}<br>
+Summary: {{ i.summary }}<br>
+Title detail: {{ i.title_detail }}<br>
+Link: {{ i.link }}<br>
+Published: {{ i.published }}<br>

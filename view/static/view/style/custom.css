@@ -1,0 +1,15 @@
+div.front-news {
+    display: inline-block;
+    width: 250px;
+    vertical-align: top;
+    border-top: 2px dotted red;
+    height: 100%;
+}
+
+ul.newslist {
+    list-style: none;
+}
+
+ul.newslist li {
+    display: inline;
+}

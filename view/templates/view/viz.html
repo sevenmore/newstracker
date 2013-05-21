@@ -22,35 +22,26 @@
     </ul>
 {% endblock %}
 {% block content %}
-    <h1>VIZUALIZACIJA UPORABNIKOV (FAKE)</h1>
+    <h1>VIZUALIZACIJA UPORABNIKOV</h1>
+    Število novih uporabnikov glede na mesec.
     <ul>
         <table id="data">
             <tfoot>
             <tr>
-                <th>1</th>
-                <th>2</th>
-                <th>3</th>
-                <th>4</th>
-                <th>5</th>
-                <th>6</th>
-                <th>7</th>
-                <th>8</th>
-                <th>9</th>
-                <th>10</th>
+                {% for user in users %}
+                    <th>
+                    {{ forloop.count }}
+                    </th>
+                {% endfor %}
             </tr>
             </tfoot>
             <tbody>
             <tr>
-                <td>0</td>
-                <td>1</td>
-                <td>3</td>
-                <td>8</td>
-                <td>9</td>
-                <td>11</td>
-                <td>21</td>
-                <td>47</td>
-                <td>62</td>
-                <td>73</td>
+                {% for user in users %}
+                    <td>
+                        {{ user }}
+                    </td>
+                {% endfor %}
             </tr>
             </tbody>
         </table>

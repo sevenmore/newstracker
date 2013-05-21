@@ -123,7 +123,7 @@ window.onload = function () {
                 ly = label[0].transform()[0][2] + ppp.dy;
                 frame.show().stop().animate(anim);
                 label[0].attr({text: data + " user" + (data == 1 ? "" : "s")}).show().stop().animateWith(frame, anim, {transform: ["t", lx, ly]}, 200 * is_label_visible);
-                label[1].attr({text: lbl + " month"}).show().stop().animateWith(frame, anim, {transform: ["t", lx, ly]}, 200 * is_label_visible);
+                label[1].attr({text: lbl + " ."}).show().stop().animateWith(frame, anim, {transform: ["t", lx, ly]}, 200 * is_label_visible);
                 dot.attr("r", 6);
                 is_label_visible = true;
             }, function () {

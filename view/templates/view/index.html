@@ -1,7 +1,7 @@
 {% extends "view/base.html" %}
 {% block title %}Index{% endblock %}
-{% block html_attributes %}ng-app="newstracker"{% endblock %}
-{% block body_attributes %}ng-controller="RssIn"{% endblock %}
+{% block html_attributes %}{% endblock %}
+{% block body_attributes %}{% endblock %}
 {% block sidebar %}
     <ul class="nav nav-tabs">
         <li><a href="/">Index</a></li>
@@ -17,9 +17,15 @@
 {% endblock %}
 {% block content %}
     <h1>NEWSTRACKER</h1>
-    <ul>
-        <li ng-repeat="rss in rssin.objects">
-            {% templatetag openvariable %}rss.url{% templatetag closevariable %}
-        </li>
+    <ul class="newslist">
+        {% for i in feed %}
+            <li>
+                <div class="front-news">
+                    <a href="{{ i.link }}">{{ i.title }}</a>
+                    <p>{{ i.published_parsed }}</p>
+                    <p>{{ i.summary  }}</p>
+                </div>
+            </li>
+        {% endfor %}
     </ul>
 {% endblock %}

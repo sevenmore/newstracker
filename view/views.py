@@ -2,10 +2,26 @@ from django.shortcuts import render_to_response, render
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
 from django.utils.html import strip_tags
+from rss.models import In
+from django.contrib.auth.models import User
+from time import mktime
+from datetime import datetime, date
 import feedparser
 
+
 def index(request):
-    return render_to_response("view/index.html",
+    entries = []
+    for r in In.objects.all():
+        rss = r.url
+        feed = feedparser.parse(rss)
+        for i in feed['items']:
+            i['summary'] = strip_tags(i['summary'])
+            i['published_parsed'] = \
+                datetime.fromtimestamp(mktime(i['published_parsed']))
+        entries.extend(feed['items'])
+        entries = sorted(entries, key=lambda entry: entry["published"])
+        entries.reverse()
+    return render_to_response("view/index.html", {'feed': entries},
                               context_instance=RequestContext(request))
 
 
@@ -42,13 +58,20 @@ def save(self, commit=True):
 
 def rss(request):
     rss = "http://www.24ur.com/rss/"
-    feed = feedparser.parse( rss )
+    feed = feedparser.parse(rss)
     for i in feed['items']:
-        i['summary'] = strip_tags(i['summary']);
-    return render_to_response("view/rss.html", {'feed':feed['items']})
+        i['summary'] = strip_tags(i['summary'])
+    return render_to_response("view/rss.html", {'feed': feed['items']})
+
 
 def viz(request):
-    return render(request, "view/viz.html")
+    today = date.today()
+    u = []
+    for i in range(1, 13):
+        users = User.objects.filter(date_joined__year=today.year,
+                                    date_joined__month=i).count()
+        u.append(users)
+    return render_to_response("view/viz.html", {'users': u})
 
 
 def analysis(request):

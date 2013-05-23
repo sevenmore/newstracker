@@ -13,3 +13,11 @@ ul.newslist {
 ul.newslist li {
     display: inline;
 }
+
+ul.horizontal {
+    list-style: none;
+}
+
+ul.horizontal li {
+    display: inline;
+}

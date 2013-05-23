@@ -2,10 +2,10 @@ from django.shortcuts import render_to_response, render
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
 from django.utils.html import strip_tags
-from rss.models import In
+from rss.models import In, Tags, Feed, Subscription
 from django.contrib.auth.models import User
 from time import mktime
-from datetime import datetime, date
+from datetime import date, datetime
 import feedparser
 
 
@@ -21,6 +21,25 @@ def index(request):
         entries.extend(feed['items'])
         entries = sorted(entries, key=lambda entry: entry["published"])
         entries.reverse()
+    for i in entries:
+        for j in Tags.objects.all():
+            if(i['summary'].lower().find(j.tag_ltrack) > -1 or i['title'].lower().find(j.tag_ltrack) > -1):
+                if(Feed.objects.filter(title=i['title']).count() == 0):
+                    #f = Feed(title=i['title'], link=i['link'], summary=i['summary'], published=datetime.fromtimestamp(mktime(i['published_parsed'])), tag=j.tag_name)
+                    f = Feed(title=i['title'], link=i['link'], summary=i['summary'],
+                             published=i['published_parsed'])
+                    f.tags = j.tag_ltrack
+                    f.save()
+                    f.tags_track.add(j)
+                    f.save()
+                else:
+                    f = Feed.objects.filter(title=i['title'])
+                    for fe in f:
+                        if(j not in fe.tags_track.all()):
+                            fe.tags_track.add(j)
+                            fe.tags = fe.tags + "; " + j.tag_ltrack
+                            fe.save()
+
     return render_to_response("view/index.html", {'feed': entries},
                               context_instance=RequestContext(request))
 
@@ -56,14 +75,6 @@ def save(self, commit=True):
     return self.user
 
 
-def rss(request):
-    rss = "http://www.24ur.com/rss/"
-    feed = feedparser.parse(rss)
-    for i in feed['items']:
-        i['summary'] = strip_tags(i['summary'])
-    return render_to_response("view/rss.html", {'feed': feed['items']})
-
-
 def viz(request):
     today = date.today()
     u = []
@@ -71,11 +82,35 @@ def viz(request):
         users = User.objects.filter(date_joined__year=today.year,
                                     date_joined__month=i).count()
         u.append(users)
-    return render_to_response("view/viz.html", {'users': u})
+    return render_to_response("view/viz.html", {'users': u},
+                              context_instance=RequestContext(request))
 
 
-def analysis(request):
-    return render(request, "view/analysis.html")
+def tracker(request):
+    su = Subscription.objects.filter(user=request.user)[0]
+    if not request.user.is_authenticated():
+        return HttpResponseRedirect("../")
+    if request.method == 'POST':
+        track = request.POST['track']
+        t = Tags(tag_ltrack=track.lower(), tag_name=track)
+        t.save()
+        su.subs.add(t)
+        su.save()
+    return render_to_response("view/tracker.html", {'subs': su},
+                              context_instance=RequestContext(request))
+
+def trackertag(request, tag):
+    if not request.user.is_authenticated():
+        return HttpResponseRedirect("../")
+    t = Tags.objects.filter(tag_ltrack=tag.lower())[0]
+    entries = []
+    feeds = Feed.objects.filter(tags_track__in=[t.id_tag])
+    return render_to_response("view/trackertag.html", {'feeds':feeds},
+                              context_instance=RequestContext(request))
+
+
+def tracked(request):
+    return render(request, "view/tracked.html")
 
 
 def about(request):

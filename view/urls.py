@@ -8,10 +8,11 @@ v1_api.register(RssInRessource())
 
 urlpatterns = patterns('',
                        url(r'^account/$', views.account, name='account'),
-                       url(r'^analysis/$', views.analysis, name='analysis'),
                        url(r'^about/$', views.about, name='about'),
+                       url(r'^tracker/(\w+)/$', views.trackertag, name='tracked'),
+                       url(r'^tracker/$', views.tracker, name='about'),
+                       url(r'^tracked/$', views.tracked, name='tracked'),
                        url(r'viz/$', views.viz, name='viz'),
                        url(r'^api/', include(v1_api.urls)),
-                       url(r'^rss/$', views.rss, name='rss'),
                        url(r'^$', views.index, name='index'),
                        )

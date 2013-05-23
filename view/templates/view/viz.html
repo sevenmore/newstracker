@@ -1,5 +1,5 @@
 {% extends "view/base.html" %}
-{% block title %}Index{% endblock %}
+{% block title %}Vizualizacija{% endblock %}
 {% block scripts %}
     {% load staticfiles %}
     <script src="{% static 'view/js/raphael-min.js' %}"></script>
@@ -14,16 +14,18 @@
         {% if not user.is_authenticated %}
             <li><a href="/login/">Prijava</a></li>
             <li><a href="/register/">Registracija</a></li>
+            <li><a href="/tracked/">Tracked</a></li>
         {% else %}
+            <li><a href="/tracker/">Tracker</a></li>
             <li><a href="/account/">Račun</a></li>
             <li><a href="/logout/">Odjava</a></li>
         {% endif %}
-        <li><a href="/viz/">Luštna vizualizacija</a></li>
+        <li><a href="/viz/">Vizualizacija uporabnikov</a></li>
     </ul>
 {% endblock %}
 {% block content %}
     <h1>VIZUALIZACIJA UPORABNIKOV</h1>
-    Število novih uporabnikov glede na mesec.
+    <h4>Število novih uporabnikov glede na mesec.</h4>
     <ul>
         <table id="data">
             <tfoot>

@@ -7,14 +7,26 @@
 </ul>
 {% endblock %}
 {% block content %}
-    Zadnja prijava: {{ user.last_login }}
+    <h4>Zadnja prijava: {{ user.last_login }}</h4>
     Če ne želite spremeniti podatka pustite polje prazno.
     <form action="" method="post" class="well">
-        <p><label>Ime: </label><input type="text" class="span3" name="first_name" value="{{ user.first_name }}"></p>
-        <p><label>Priimek: </label><input type="text" class="span3" name="last_name" value="{{ user.last_name }}"></p>
-        <p><label>E-mail: </label><input type="text" class="span3" name="email" value="{{ user.email }}"></p>
-        <p><label>Geslo: </label><input type="password" class="span3" class="btn btn-primary" name="password" value=""></p>
-        <p><input type="submit" value="Shrani"></p>
+        <table>
+            <tr>
+                <td>Ime:</td><td><input type="text" class="span3" name="first_name" value="{{ user.first_name }}"><td>
+            </tr>
+            <tr>
+                <td>Priimek:</td><td><input type="text" class="span3" name="last_name" value="{{ user.last_name }}"></td>
+            </tr>
+            <tr>
+                <td>E-mail:</td><td><input type="text" class="span3" name="email" value="{{ user.email }}"></td>
+            </tr>
+            <tr>
+                <td>Geslo:</td><td><input type="password" class="span3" class="btn btn-primary" name="password" value=""></td>
+            </tr>
+            <tr>
+                <td><input type="submit" value="Shrani" class="btn btn-primary"></td>
+            </tr>
+        </table>
     </form>
 {% endblock %}
 

@@ -18,16 +18,20 @@
     </ul>
 {% endblock %}
 {% block content %}
-    <h1>NEWSTRACKER</h1>
+    <h1>TRACKER</h1>
     <ul class="newslist">
-        {% for i in feed %}
-            <li>
-                <div class="front-news">
-                    <a href="{{ i.link }}">{{ i.title }}</a>
-                    <p>{{ i.published_parsed }}</p>
-                    <p>{{ i.summary  }}</p>
-                </div>
-            </li>
-        {% endfor %}
+    {% for i in feeds %}
+        <li>
+            <div class="front-news">
+                <a href="{{ i.link }}">{{ i.title }}</a>
+                <p>{{ i.published_parsed }}</p>
+                <p>{{ i.summary  }}</p>
+            </div>
+        </li>
+    {% empty %}
+        <div>
+            <p>Nobene novice</p>
+        </div>
+    {% endfor %}
     </ul>
 {% endblock %}

@@ -18,15 +18,15 @@
     </ul>
 {% endblock %}
 {% block content %}
-    <h1>NEWSTRACKER</h1>
-    <ul class="newslist">
-        {% for i in feed %}
+    <h1>TRACKER</h1>
+    <form class="well" method="post">
+        <div>Nov track:</div><div><span><input type="text" class="span3" name="track"></span><span><input type="submit" class="btn btn-primary" value="Dodaj"></span></div>
+    </form>
+    <h4>Trenutni tracki:</h4>
+    <ul class="horizontal">
+        {% for t in subs.subs.all %}
             <li>
-                <div class="front-news">
-                    <a href="{{ i.link }}">{{ i.title }}</a>
-                    <p>{{ i.published_parsed }}</p>
-                    <p>{{ i.summary  }}</p>
-                </div>
+                <a href="/tracker/{{ t }}">{{ t }}</a>
             </li>
         {% endfor %}
     </ul>

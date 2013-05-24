@@ -45,6 +45,6 @@ class Subscription(models.Model):
         su = ""
         for i in self.subs.all():
             su = i.tag_name + ";" + su
-        return '{0}: {1}'.format(self.user, su)
+        return u'{0}: {1}'.format(self.user, su)
 
 

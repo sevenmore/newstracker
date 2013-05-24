@@ -92,8 +92,13 @@ def tracker(request):
         return HttpResponseRedirect("../")
     if request.method == 'POST':
         track = request.POST['track']
-        t = Tags(tag_ltrack=track.lower(), tag_name=track)
-        t.save()
+        t = None
+        if Tags.objects.filter(tag_ltrack=track.lower()).count() == 0:
+            t = Tags(tag_ltrack=track.lower(), tag_name=track)
+            t.save()
+        else:
+            t = Tags.objects.filter(tag_ltrack=track.lower())[0]
+        #if su.subs.filter(id_tag=[t.id_tag]).count() == 0:
         su.subs.add(t)
         su.save()
     return render_to_response("view/tracker.html", {'subs': su},
@@ -103,7 +108,6 @@ def trackertag(request, tag):
     if not request.user.is_authenticated():
         return HttpResponseRedirect("../")
     t = Tags.objects.filter(tag_ltrack=tag.lower())[0]
-    entries = []
     feeds = Feed.objects.filter(tags_track__in=[t.id_tag])
     return render_to_response("view/trackertag.html", {'feeds':feeds},
                               context_instance=RequestContext(request))
